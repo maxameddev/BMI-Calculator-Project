@@ -1,3 +1,5 @@
+import NumberInputWithUnit from './NumberInputWithUnit';
+
 export default function SliderInput({
   id,
   label,
@@ -45,26 +47,17 @@ export default function SliderInput({
         className="mb-3"
       />
 
-      <div className="relative">
-        <input
-          type="number"
-          id={id}
-          value={value}
-          onChange={handleInputChange}
-          min={1}
-          step={step}
-          placeholder={`Geli ${label.toLowerCase()}`}
-          aria-invalid={Boolean(error)}
-          aria-describedby={error ? `${id}-error` : undefined}
-          className={`input-field pr-14 ${error ? 'border-red-400 dark:border-red-500 focus:ring-red-500' : ''}`}
-        />
-        <span
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-400 dark:text-gray-500 pointer-events-none"
-          aria-hidden="true"
-        >
-          {unit}
-        </span>
-      </div>
+      <NumberInputWithUnit
+        id={id}
+        value={value}
+        onChange={handleInputChange}
+        min={1}
+        step={step}
+        unit={unit}
+        placeholder={`Geli ${label.toLowerCase()}`}
+        error={error}
+        describedBy={error ? `${id}-error` : undefined}
+      />
 
       {error && (
         <p id={`${id}-error`} className="mt-2 text-sm text-red-500" role="alert">

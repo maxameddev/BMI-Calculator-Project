@@ -1,5 +1,6 @@
 import { Calculator } from 'lucide-react';
 import GenderSelector from './GenderSelector';
+import NumberInputWithUnit from './NumberInputWithUnit';
 import SliderInput from './SliderInput';
 import { HEIGHT_MIN, HEIGHT_MAX, WEIGHT_MIN, WEIGHT_MAX } from '../utils/bmi';
 
@@ -34,18 +35,18 @@ export default function BmiForm({ formData, errors, onFieldChange, onCalculate }
 
         <div>
           <label htmlFor="age" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Da&apos;da (sano) <span className="text-red-500" aria-hidden="true">*</span>
+            Da&apos;da <span className="text-red-500" aria-hidden="true">*</span>
           </label>
-          <input
-            type="number"
+          <NumberInputWithUnit
             id="age"
             value={formData.age}
             onChange={(e) => onFieldChange('age', e.target.value)}
             min={1}
+            step={1}
+            unit="sano"
             placeholder="Geli da'daada"
-            aria-invalid={Boolean(errors.age)}
-            aria-describedby={errors.age ? 'age-error' : undefined}
-            className={`input-field ${errors.age ? 'border-red-400 dark:border-red-500 focus:ring-red-500' : ''}`}
+            error={errors.age}
+            describedBy={errors.age ? 'age-error' : undefined}
           />
           {errors.age && (
             <p id="age-error" className="mt-2 text-sm text-red-500" role="alert">
